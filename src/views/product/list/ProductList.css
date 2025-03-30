@@ -1,0 +1,32 @@
+.product-list-container {
+    padding: 20px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-button {
+    /* padding: 8px 12px; */
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #0a0a0a;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.pagination-button:hover {
+    background-color: #E80071;
+    color: #fff;
+}
+
+.pagination-button.active {
+    background-color: #E80071;
+    color: #fff;
+}
