@@ -10,6 +10,9 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: string[];
+  reviews: Review[];
+  availabilityStatus: string;
+  minimumOrderQuantity: number;
 }
 
 export interface ProductsResponse {
@@ -23,8 +26,14 @@ export interface ProductCardProps {
   product: Product;
 }
 
+export interface ProductReviewType {
+reviews: Review[];
+}
+
 export interface Review {
-  date: string;
-  comment: string;
   rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+  reviewerEmail: string;
 }
