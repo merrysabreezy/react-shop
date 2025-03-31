@@ -28,6 +28,7 @@ export default function ProductDetails() {
       <div className='placeholder'>Please select a product from the list.</div>
     );
   }
+  console.log({ error });
 
   if (error) {
     return <div className='error-message'>{error}</div>;
