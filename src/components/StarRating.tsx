@@ -1,8 +1,7 @@
-
-interface StarRatingType{
-    rating:number
+interface StarRatingType {
+  rating: number;
 }
-const StarRating = ({ rating }:StarRatingType) => {
+const StarRating = ({ rating }: StarRatingType) => {
   const totalStars = 5;
   const fullStar = '★';
   const emptyStar = '☆';
@@ -19,12 +18,12 @@ const StarRating = ({ rating }:StarRatingType) => {
   return <div>{starElements}</div>;
 };
 
-export default StarRating
+export default StarRating;
 
 const styles = {
-    star: {
+  star: {
     color: '#ffa500',
     fontSize: '20px',
-    marginRight: '5px',
-  },
-}
+    marginRight: '5px'
+  }
+};
