@@ -1,28 +1,34 @@
-import { Review } from '../../../types/types';
+import StarRating from '../../../components/StarRating';
+import { ProductReviewType } from '../../../types/types';
+import { getInitials } from '../../../utils/nameInitialHelper';
+import "./Reviews.css"
 
-const ProductReviews = () => {
-  const reviews: Review[] = [
-    { date: '2024-01-10', comment: 'Great product!', rating: 5 },
-    { date: '2024-02-15', comment: 'Good value for money.', rating: 4 },
-    { date: '2024-03-05', comment: 'Average quality.', rating: 3 }
-  ];
-
-  return (
-    <div className='reviews-section'>
+const ProductReviews = ({reviews}: ProductReviewType) => {
+return(
+     <div className='reviews-section'>
       <h3 className='reviews-title'>Customer Reviews</h3>
-      {reviews.length > 0 ? (
-        reviews.map((review, index) => (
-          <div key={index} className='review-item'>
-            <p className='review-date'>{review.date}</p>
-            <p className='review-comment'>{review.comment}</p>
-            <p className='review-rating'>Rating: {review.rating} ⭐</p>
+      {reviews.length > 0 ? ( reviews.map((review, index) => (
+        <div key={index} className="review-card">
+          <div className="avatar">
+            {getInitials(review.reviewerName)}
           </div>
-        ))
-      ) : (
-        <p>No reviews available.</p>
-      )}
+          <div className="review-content">
+            <div className="reviewer-info">
+              <b>{review.reviewerName}</b>
+              <i className='review-date'>
+                {new Date(review.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </i>
+            </div>
+            <StarRating rating={review.rating} />
+            <p className='comment'>{review.comment}</p>
+          </div>
+        </div>
+      ))) :(<p>No reviews available</p>)}
     </div>
-  );
-};
+    )};
 
 export default ProductReviews;
