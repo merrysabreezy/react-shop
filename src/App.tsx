@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from './views/product/list';
 import ProductDetails from './views/product/detail';
-// import ProductDetailPlaceholder from './views/product/detail/ProductDetailPlaceholder';
 import EmptyState from './components/EmptyState';
 
 const App: React.FC = () => {
@@ -13,7 +12,6 @@ const App: React.FC = () => {
           <Routes>
             <Route path='/product/:id' element={<ProductDetails />} />
             <Route path='*' element={<EmptyState />} />
-            {/* <Route path='*' element={<ProductDetailPlaceholder />} /> */}
           </Routes>
         </div>
 
