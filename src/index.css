@@ -1,3 +1,8 @@
+:root {
+    --primary-color: #d9534f;
+    --text-color: #0A0A0A;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #F3F3F3;
@@ -5,3 +10,17 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.d-flex{
+    display: flex;
+}
+
+/* .right-panel {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.element::-webkit-scrollbar {
+    display: none;
+} */
