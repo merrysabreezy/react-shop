@@ -9,7 +9,6 @@
 }
 
 .pagination-button {
-    /* padding: 8px 12px; */
     margin: 0 5px;
     height: 40px;
     width: 40px;
@@ -21,12 +20,7 @@
     transition: background-color 0.3s ease-in-out;
 }
 
-.pagination-button:hover {
-    background-color: #E80071;
-    color: #fff;
-}
-
-.pagination-button.active {
-    background-color: #E80071;
+.pagination-button:hover,.pagination-button.active  {
+    background-color: var(--primary-color);
     color: #fff;
 }

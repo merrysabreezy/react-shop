@@ -38,7 +38,7 @@ export default function ProductDetails() {
     return <div className='loading'>Loading product details...</div>;
   }
 
-  const renderStars = (rating:number) => {
+  const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 !== 0;
     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
@@ -50,50 +50,73 @@ export default function ProductDetails() {
       </>
     );
   };
-  const discountedPrice = (product.price * (1 - product.discountPercentage / 100)).toFixed(2);
+  const discountedPrice = (
+    product.price *
+    (1 - product.discountPercentage / 100)
+  ).toFixed(2);
 
-return(
+  return (
     <div className='product-details-container'>
-
-   <div className="product-container">
-      <div className="image-container">
-        <img src={product.thumbnail} alt={product.title} className="product-image" />
-      </div>
-      <div className="details-container">
-        <h1 className="product-title">{product.title}</h1>
-         <div className='d-flex'>
-          <span>Brand:</span>
-          <span className="product-brand">{product.brand}</span>
-          <span className="product-category">{product.category}</span>
-         </div>
-        {/* <p className="product-brand">Brand: {product.brand}</p> */}
-        {/* <p className="product-category">{product.category}</p> */}
-        <div className="rating-container">
-          <span className="product-rating">{product.rating.toFixed(1)}</span>
-          <span className="stars">{renderStars(product.rating)}</span>
+      <div className='product-container'>
+        <div className='image-container'>
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            className='product-image'
+          />
         </div>
-       <div className='d-flex'>
-            <div className={`availability-status ${product.stock > 10 ? 'in-stock' : 'low-stock'}`}>
-              {product.stock > 10 ? "In Stock" : "Low Stock"}
+        <div className='details-container'>
+          <h1 className='product-title'>{product.title}</h1>
+          <div className='d-flex'>
+            <span className='product-brand'>Brand: {product.brand}</span>
+            <span className='product-category'>{product.category}</span>
+          </div>
+          {/* <p className="product-brand">Brand: {product.brand}</p> */}
+          {/* <p className="product-category">{product.category}</p> */}
+          <div className='rating-container'>
+            <span className='product-rating'>{product.rating.toFixed(1)}</span>|{' '}
+            <span className='stars'>{renderStars(product.rating)}</span>
+          </div>
+          <div className='d-flex'>
+            <div
+              className={`availability-status ${
+                product.stock > 10
+                  ? 'in-stock'
+                  : product.stock === 0
+                  ? 'out-of-stock'
+                  : 'low-stock'
+              }`}
+            >
+              {product.stock > 10
+                ? 'In Stock'
+                : product.stock === 0
+                ? 'Out of stock'
+                : 'Low Stock'}
             </div>
-          {/* <p className="product-availability">
-            Availability: {product.availabilityStatus}</p>
-          {product.stock && <p className="product-stock"> {product.stock} items left</p>} */}
-        </div>  
-        <p className="product-min-order">Minimum Order Quantity: {product.minimumOrderQuantity}</p>
-        <div className="price-container">
-          <span className="original-price">${product.price.toFixed(2)}</span>
-          <span className="discounted-price">${discountedPrice}</span>
-          <span className="discount-percentage">{product.discountPercentage}% off</span>
-        </div>
-       
-        <p className="product-description">{product.description}</p>
-      </div>
-    </div>
-          <ProductReviews reviews={product?.reviews} />
+            {/* <p className="product-availability">
+            Availability: {product.availabilityStatus}</p> */}
+            {product.stock > 0 && (
+              <small className='product-stock'>
+                {product.stock} items left
+              </small>
+            )}
+            <small>Min. Order: {product.minimumOrderQuantity}</small>
           </div>
 
-)
+          <div className='price-container'>
+            <span className='original-price'>${product.price.toFixed(2)}</span>
+            <span className='discounted-price'>${discountedPrice}</span>
+            <span className='discount-percentage'>
+              {product.discountPercentage}% off
+            </span>
+          </div>
+
+          <p className='product-description'>{product.description}</p>
+        </div>
+      </div>
+      <ProductReviews reviews={product?.reviews} />
+    </div>
+  );
   return (
     <div className='product-details-container'>
       <img
