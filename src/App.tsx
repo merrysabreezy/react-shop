@@ -19,7 +19,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Right side: Product list */}
-        <div
+        <div className='right-panel'
           style={{
             width: '400px',
             // borderLeft: '1px solid #ccc',
