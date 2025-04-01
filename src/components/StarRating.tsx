@@ -1,7 +1,7 @@
-interface StarRatingType {
-  rating: number;
-}
-const StarRating = ({ rating }: StarRatingType) => {
+import React from 'react';
+import { StarRatingProps } from '../types/types';
+
+const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
   const totalStars = 5;
   const fullStar = '★';
   const emptyStar = '☆';

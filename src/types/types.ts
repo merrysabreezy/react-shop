@@ -26,8 +26,8 @@ export interface ProductCardProps {
   product: Product;
 }
 
-export interface ProductReviewType {
-reviews: Review[];
+export interface ProductReviewProps {
+  reviews: Review[];
 }
 
 export interface Review {
@@ -36,4 +36,22 @@ export interface Review {
   date: string;
   reviewerName: string;
   reviewerEmail: string;
+}
+
+export interface StarRatingProps {
+  rating: number;
+}
+
+export interface IDevice {
+  PHONE: number;
+  TABLET: number;
+  DESKTOP: number;
+  DESKTOP_XL: number;
+}
+
+export interface IWidthArgs {
+  isMobile?: boolean;
+  isTablet?: boolean;
+  isLaptop?: boolean;
+  isDesktopXL?: boolean;
 }

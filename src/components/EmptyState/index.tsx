@@ -1,10 +1,14 @@
-import { useIsSmallScreen } from '../../utils/deviceHelper';
+import React from 'react';
+import useWidth from '../../utils/deviceHelper';
 import './EmptyState.css';
+interface ErrorStateType {
+  error: string;
+}
 
-const EmptyState = () => {
-  const isSmallScreen = useIsSmallScreen();
+const EmptyState: React.FC = () => {
+  const { isMobile } = useWidth();
 
-  if(isSmallScreen)return <></>
+  if (isMobile) return <></>;
   return (
     <div className='empty-state-container'>
       <div className='empty-state-message'>
@@ -19,5 +23,13 @@ const EmptyState = () => {
     </div>
   );
 };
+
+export const ErrorState = ({ error }: ErrorStateType) => (
+  <div className='error-container'>
+    <div className='error-message'>
+      <p>{error}</p>
+    </div>
+  </div>
+);
 
 export default EmptyState;

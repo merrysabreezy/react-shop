@@ -3,12 +3,13 @@ import { getAllProducts } from '../../../api/product.api';
 import { Product } from '../../../types/types';
 import './ProductList.css';
 import ProductCard from '../../../components/ProductCard';
-import { useIsSmallScreen } from '../../../utils/deviceHelper';
+import useWidth from '../../../utils/deviceHelper';
+import { ErrorState } from '../../../components/EmptyState';
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string>('');
-  const isSmallScreen = useIsSmallScreen();
+  const { isMobile } = useWidth();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const productsPerPage = 10;
 
@@ -32,12 +33,19 @@ const ProductList: React.FC = () => {
   );
 
   const totalPages = Math.ceil(products.length / productsPerPage);
+
+  if (error) {
+    return <ErrorState error={error} />;
+  }
+
   return (
     <div className='product-list-container'>
-      {isSmallScreen && <div className='right-pane-title'> Products </div>}
+      {isMobile && <div className='right-pane-title'> Products </div>}
+
       {currentProducts.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
+
       <div className='pagination'>
         {[...Array(totalPages)].map((_, i) => (
           <button

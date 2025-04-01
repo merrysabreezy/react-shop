@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDetail.css';
 import { Product } from '../../../types/types';
 import { getProductById } from '../../../api/product.api';
 import ProductReviews from '../review';
+import EmptyState, { ErrorState } from '../../../components/EmptyState';
 
-export default function ProductDetails() {
+const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string>('');
@@ -24,18 +25,19 @@ export default function ProductDetails() {
   }, [id]);
 
   if (!id) {
-    return (
-      <div className='placeholder'>Please select a product from the list.</div>
-    );
+    return <EmptyState />;
   }
-  console.log({ error });
 
   if (error) {
-    return <div className='error-message'>{error}</div>;
+    return <ErrorState error={error} />;
   }
 
   if (!product) {
-    return <div className='loading'>Loading product details...</div>;
+    return (
+      <div className='loading-container'>
+        <div className='loading'></div>
+      </div>
+    );
   }
 
   const renderStars = (rating: number) => {
@@ -50,10 +52,20 @@ export default function ProductDetails() {
       </>
     );
   };
+
   const discountedPrice = (
     product.price *
     (1 - product.discountPercentage / 100)
   ).toFixed(2);
+
+  const getStockStatus = (stock: number) => {
+    if (stock === 0)
+      return { label: 'Out of stock', className: 'out-of-stock' };
+    if (stock <= 10) return { label: 'Low Stock', className: 'low-stock' };
+    return { label: 'In Stock', className: 'in-stock' };
+  };
+
+  const { label, className } = getStockStatus(product.stock);
 
   return (
     <div className='product-details-container'>
@@ -65,40 +77,37 @@ export default function ProductDetails() {
             className='product-image'
           />
         </div>
+
         <div className='details-container'>
           <h1 className='product-title'>{product.title}</h1>
+
           <div className='d-flex'>
-            <span className='product-brand'>Brand: {product.brand}</span>
-            <span className='product-category'>{product.category}</span>
+            {product.brand && (
+              <span className='product-brand border-right'>
+                Brand: <span className='brand-title'> {product.brand}</span>
+              </span>
+            )}
+            {product.category && (
+              <span className='product-category'>{product.category}</span>
+            )}
           </div>
-         <div className='rating-container'>
-            <span className='product-rating'>{product.rating.toFixed(1)}</span>|{' '}
+
+          <div className='rating-container'>
+            <span className='product-rating'>{product.rating.toFixed(1)}</span>{' '}
             <span className='stars'>{renderStars(product.rating)}</span>
           </div>
+
           <div className='d-flex'>
-            <div
-              className={`availability-status ${
-                product.stock > 10
-                  ? 'in-stock'
-                  : product.stock === 0
-                  ? 'out-of-stock'
-                  : 'low-stock'
-              }`}
-            >
-              {product.stock > 10
-                ? 'In Stock'
-                : product.stock === 0
-                ? 'Out of stock'
-                : 'Low Stock'}
-            </div>
-            {/* <p className="product-availability">
-            Availability: {product.availabilityStatus}</p> */}
+            <div className={`availability-status ${className}`}>{label}</div>
             {product.stock > 0 && (
-              <small className='product-stock'>
-                {product.stock} items left
+              <small className='product-stock border-right'>
+                {product.stock} {product.stock == 1 ? 'item ' : 'items '}
+                left
               </small>
             )}
-            <small>Min. Order: {product.minimumOrderQuantity}</small>
+            <small className='minimum-order'>
+              Min Order: {product.minimumOrderQuantity}
+            </small>
           </div>
 
           <div className='price-container'>
@@ -112,28 +121,10 @@ export default function ProductDetails() {
           <p className='product-description'>{product.description}</p>
         </div>
       </div>
+
       <ProductReviews reviews={product?.reviews} />
     </div>
   );
-  return (
-    <div className='product-details-container'>
-      <img
-        src={product?.thumbnail}
-        alt={product?.title}
-        className='product-image'
-      />
-      <h2 className='product-detail-title'>{product?.title}</h2>
-      <p className='product-brand'>Brand: {product?.brand}</p>
-      <p className='product-category'>Category: {product?.category}</p>
-      <p className='product-price'>Price: ${product?.price}</p>
-      <p className='product-discount'>
-        Discount: {product?.discountPercentage}%
-      </p>
-      <p className='product-stock'>Stock: {product?.stock}</p>
-      <p className='product-rating'>Rating: {product?.rating} ⭐</p>
-      <p className='product-description'>{product?.description}</p>
+};
 
-      {/* <ProductReviews reviews={product?.reviews} /> */}
-    </div>
-  );
-}
+export default ProductDetails;

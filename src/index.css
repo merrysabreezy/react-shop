@@ -1,7 +1,5 @@
 :root {
-    /* --primary-color: #d9534f; */
     --primary-color: #f2a900;
-    --text-color: #0A0A0A;
 }
 
 body {
@@ -18,37 +16,39 @@ body {
     height: 100vh;
     padding: 0 20px;
 }
+@media (min-width: 1024px) { 
+    /* Left panel: Product details */
+    .left-panel {
+        flex: 1;
+        max-width: 900px;
+        min-width: 600px;
+    }
 
-/* Left panel: Product details */
-.left-panel {
-    flex: 1;
-    max-width: 900px;
-    min-width: 600px;
-}
-
-/* Right panel: Product list */
-.right-panel {
-    width: 400px;
-    min-width: 350px;
-    padding-left: 20px;
+    /* Right panel: Product list */
+    .right-panel {
+        width: 400px;
+        min-width: 350px;
+        padding-left: 20px;
+    }
 }
 
 @media (max-width: 1024px) {
-
     /* Tablets */
     .main-container {
-        flex-direction: column;
         align-items: flex-start;
         height: auto;
+        gap: 20px;
     }
 
     .left-panel {
-        min-width: 100%;
-        max-width: 100%;
+        flex:1;
+        min-width: 300px;
+        max-width: 5500px;
     }
 
     .right-panel {
-        width: 100%;
+        /* flex: 1; */
+        width: 300px;
         border-left: none;
         padding-left: 0;
     }
