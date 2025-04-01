@@ -1,6 +1,10 @@
+import { useIsSmallScreen } from '../../utils/deviceHelper';
 import './EmptyState.css';
 
 const EmptyState = () => {
+  const isSmallScreen = useIsSmallScreen();
+
+  if(isSmallScreen)return <></>
   return (
     <div className='empty-state-container'>
       <div className='empty-state-message'>

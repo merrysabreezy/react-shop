@@ -6,7 +6,7 @@ import "./Reviews.css"
 const ProductReviews = ({reviews}: ProductReviewType) => {
 return(
      <div className='reviews-section'>
-      <h3 className='reviews-title'>Customer Reviews</h3>
+      <div className='reviews-title'>Customer Reviews</div>
       {reviews.length > 0 ? ( reviews.map((review, index) => (
         <div key={index} className="review-card">
           <div className="avatar">
