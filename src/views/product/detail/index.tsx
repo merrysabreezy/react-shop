@@ -10,18 +10,29 @@ const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (!id) return;
     const fetchProduct = async () => {
+      setLoading(true);
+      setError('');
       try {
         const data = await getProductById(Number(id));
         setProduct(data);
+        setError('');
       } catch (err) {
         setError('Failed to load product details.');
+      } finally {
+        setLoading(false);
       }
     };
     fetchProduct();
+
+    return () => {
+      setError('');
+      setLoading(false);
+    };
   }, [id]);
 
   if (!id) {
@@ -32,7 +43,7 @@ const ProductDetails: React.FC = () => {
     return <ErrorState error={error} />;
   }
 
-  if (!product) {
+  if (!product || loading) {
     return (
       <div className='loading-container'>
         <div className='loading'></div>
