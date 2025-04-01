@@ -12,16 +12,59 @@ body {
     padding: 0;
 }
 
-.d-flex{
+.main-container{
     display: flex;
+    justify-content: center;
+    height: 100vh;
+    padding: 0 20px;
 }
 
-/* .right-panel {
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+/* Left panel: Product details */
+.left-panel {
+    flex: 1;
+    max-width: 900px;
+    min-width: 600px;
 }
 
-.element::-webkit-scrollbar {
-    display: none;
-} */
+/* Right panel: Product list */
+.right-panel {
+    width: 400px;
+    min-width: 350px;
+    padding-left: 20px;
+}
+
+@media (max-width: 1024px) {
+
+    /* Tablets */
+    .main-container {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+    }
+
+    .left-panel {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .right-panel {
+        width: 100%;
+        border-left: none;
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mobile */
+    .main-container {
+        flex-direction: column;
+        gap: 15px;
+        height: auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        max-width: 100%;
+    }
+}

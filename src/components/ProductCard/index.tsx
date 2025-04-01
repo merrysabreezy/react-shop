@@ -3,6 +3,7 @@ import { ProductCardProps } from '../../types/types';
 import './ProductCard.css';
 import { Link } from 'react-router-dom';
 import StarRating from '../StarRating';
+import { scrollToTop } from '../../utils/pageHelper';
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const discountedPrice = (product.price * (1 - product.discountPercentage / 100)).toFixed(2);
@@ -12,6 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       to={`/product/${product.id}`}
       key={product.id}
       className='product-link'
+      onClick={()=> scrollToTop()}
     >
       <div className='product-card'>
         <img

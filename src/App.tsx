@@ -6,9 +6,9 @@ import EmptyState from './components/EmptyState';
 const App: React.FC = () => {
   return (
     <Router>
-      <div style={{ display: 'flex', height: '100vh' }}>
+      <div className='main-container'>
         {/* Left side: Product details (or placeholder) */}
-        <div style={{ flex: 1 }}>
+        <div  className="left-panel">
           <Routes>
             <Route path='/product/:id' element={<ProductDetails />} />
             <Route path='*' element={<EmptyState />} />
@@ -16,15 +16,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Right side: Product list */}
-        <div
-          className='right-panel'
-          style={{
-            width: '400px'
-            // borderLeft: '1px solid #ccc',
-            // overflowY: 'auto'
-            // padding: '20px'
-          }}
-        >
+        <div className='right-panel'>
           <ProductList />
         </div>
       </div>

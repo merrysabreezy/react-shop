@@ -71,9 +71,7 @@ export default function ProductDetails() {
             <span className='product-brand'>Brand: {product.brand}</span>
             <span className='product-category'>{product.category}</span>
           </div>
-          {/* <p className="product-brand">Brand: {product.brand}</p> */}
-          {/* <p className="product-category">{product.category}</p> */}
-          <div className='rating-container'>
+         <div className='rating-container'>
             <span className='product-rating'>{product.rating.toFixed(1)}</span>|{' '}
             <span className='stars'>{renderStars(product.rating)}</span>
           </div>
