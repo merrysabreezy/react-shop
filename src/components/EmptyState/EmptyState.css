@@ -1,4 +1,4 @@
-.empty-state-container {
+.empty-state-container,.error-container {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     text-align: center;
 }
 
-.empty-state-message {
+.empty-state-message,.error-message {
     position: fixed;
     z-index: 2;
     padding: 45px 70px;

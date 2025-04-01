@@ -28,7 +28,7 @@
 
  @media (max-width: 1024px) {
     .product-list-container {
-        padding:0;
+        padding: 10px 0 0;
         min-height: 100vh;
         overflow: visible !important;
     }
@@ -42,6 +42,5 @@
     .pagination {
         margin-top: 10px;
         padding-bottom: 20px;
-        /* ✅ Ensures it's not cut off */
     }
  }
