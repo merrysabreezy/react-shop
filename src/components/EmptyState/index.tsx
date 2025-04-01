@@ -1,14 +1,10 @@
 import React from 'react';
-import useWidth from '../../utils/deviceHelper';
 import './EmptyState.css';
 interface ErrorStateType {
   error: string;
 }
 
 const EmptyState: React.FC = () => {
-  const { isMobile } = useWidth();
-
-  if (isMobile) return <></>;
   return (
     <div className='empty-state-container'>
       <div className='empty-state-message'>

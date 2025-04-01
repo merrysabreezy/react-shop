@@ -43,7 +43,7 @@ const ProductDetails: React.FC = () => {
     return <ErrorState error={error} />;
   }
 
-  if (!product || loading) {
+  if (!product) {
     return (
       <div className='loading-container'>
         <div className='loading'></div>
@@ -79,62 +79,74 @@ const ProductDetails: React.FC = () => {
   const { label, className } = getStockStatus(product.stock);
 
   return (
-    <div className='product-details-container'>
-      <div className='product-container'>
-        <div className='image-container'>
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            className='product-image'
-          />
+    <>
+      {loading && (
+        <div className='loading-container'>
+          <div className='loading'></div>
         </div>
+      )}
 
-        <div className='details-container'>
-          <h1 className='product-title'>{product.title}</h1>
-
-          <div className='d-flex'>
-            {product.brand && (
-              <span className='product-brand border-right'>
-                Brand: <span className='brand-title'> {product.brand}</span>
-              </span>
-            )}
-            {product.category && (
-              <span className='product-category'>{product.category}</span>
-            )}
+      <div className={`product-details-container ${loading ? 'blurred' : ''}`}>
+        <div className='product-container'>
+          <div className='image-container'>
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+              className='product-image'
+            />
           </div>
 
-          <div className='rating-container'>
-            <span className='product-rating'>{product.rating.toFixed(1)}</span>{' '}
-            <span className='stars'>{renderStars(product.rating)}</span>
-          </div>
+          <div className='details-container'>
+            <h1 className='product-title'>{product.title}</h1>
 
-          <div className='d-flex'>
-            <div className={`availability-status ${className}`}>{label}</div>
-            {product.stock > 0 && (
-              <small className='product-stock border-right'>
-                {product.stock} {product.stock == 1 ? 'item ' : 'items '}
-                left
+            <div className='d-flex'>
+              {product.brand && (
+                <span className='product-brand border-right'>
+                  Brand: <span className='brand-title'> {product.brand}</span>
+                </span>
+              )}
+              {product.category && (
+                <span className='product-category'>{product.category}</span>
+              )}
+            </div>
+
+            <div className='rating-container'>
+              <span className='product-rating'>
+                {product.rating.toFixed(1)}
+              </span>{' '}
+              <span className='stars'>{renderStars(product.rating)}</span>
+            </div>
+
+            <div className='d-flex'>
+              <div className={`availability-status ${className}`}>{label}</div>
+              {product.stock > 0 && (
+                <small className='product-stock border-right'>
+                  {product.stock} {product.stock == 1 ? 'item ' : 'items '}
+                  left
+                </small>
+              )}
+              <small className='minimum-order'>
+                Min Order: {product.minimumOrderQuantity}
               </small>
-            )}
-            <small className='minimum-order'>
-              Min Order: {product.minimumOrderQuantity}
-            </small>
-          </div>
+            </div>
 
-          <div className='price-container'>
-            <span className='original-price'>${product.price.toFixed(2)}</span>
-            <span className='discounted-price'>${discountedPrice}</span>
-            <span className='discount-percentage'>
-              {product.discountPercentage}% off
-            </span>
-          </div>
+            <div className='price-container'>
+              <span className='original-price'>
+                ${product.price.toFixed(2)}
+              </span>
+              <span className='discounted-price'>${discountedPrice}</span>
+              <span className='discount-percentage'>
+                {product.discountPercentage}% off
+              </span>
+            </div>
 
-          <p className='product-description'>{product.description}</p>
+            <p className='product-description'>{product.description}</p>
+          </div>
         </div>
-      </div>
 
-      <ProductReviews reviews={product?.reviews} />
-    </div>
+        <ProductReviews reviews={product?.reviews} />
+      </div>
+    </>
   );
 };
 

@@ -5,7 +5,11 @@
     align-items: center;
     text-align: center;
 }
-
+.empty-state-container{
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
 .empty-state-message,.error-message {
     position: fixed;
     z-index: 2;
